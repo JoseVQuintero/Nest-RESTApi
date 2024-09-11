@@ -21,6 +21,7 @@ import { ProfilesModule } from './profiles/profiles.module';
       entities: [UserEntity, ProfileEntity],
       synchronize: true,
       logging: true,
+      ssl: { rejectUnauthorized: false }
     }),
     UserModule,
     ProfilesModule,
