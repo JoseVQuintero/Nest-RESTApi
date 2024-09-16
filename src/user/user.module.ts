@@ -1,8 +1,9 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserController } from './user.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserEntity } from './entities/user.entity';
+import { simpleFunc, simpleFunc2 } from '../middleware';
 
 @Module({
   imports: [
@@ -11,4 +12,9 @@ import { UserEntity } from './entities/user.entity';
   controllers: [UserController],
   providers: [UserService],
 })
-export class UserModule {}
+
+export class UserModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(simpleFunc2).forRoutes('users');
+  }
+}
