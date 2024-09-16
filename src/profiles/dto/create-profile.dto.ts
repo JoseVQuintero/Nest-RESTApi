@@ -6,17 +6,17 @@ import {
 import { IsJSON } from 'class-validator';
 import { IContent } from '../interface/profile';
 
+export enum UserRole {
+  ADMIN = 'admin',
+  EDITOR = 'editor',
+  GHOST = 'ghost',
+}
+
 // create-user-dto
 export class CreateProfileDto {
   @IsNotEmpty()
-  @IsString()
-  fullName: string;
-
-  @IsNotEmpty()
-  @IsEmail()
-  email: string;
+  role: UserRole;
 
   @IsJSON()
-  content: IContent;
-  
+  modules: IContent;
 }

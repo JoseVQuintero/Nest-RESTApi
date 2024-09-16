@@ -1,4 +1,4 @@
 export interface IContent {
-  messages: string[];
+  module: string[];
   detail: string;
 }

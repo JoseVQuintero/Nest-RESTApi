@@ -11,12 +11,16 @@ import { IContent } from '../interface/user';
 export class CreateUserDto {
   @IsNotEmpty()
   @IsString()
-  fullName: string;
+  name: string;
+
+  @IsString()
+  userName?: string;
+
+  @IsString()
+  password: string;
 
   @IsNotEmpty()
   @IsEmail()
   email: string;
 
-  @IsJSON()
-  content: IContent;
 }

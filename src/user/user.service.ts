@@ -28,14 +28,25 @@ export class UserService {
   async findAll(): Promise<UserEntity[]> {
     return await this.userRepository.find({
       relations: {
-        Profile: true,
-      },
+        profile: true,
+      }
     });
   }
 
+  async findOneByEmail(email: string): Promise<UserEntity> {    
+    const user = await this.userRepository.findOneBy({ email });
+    return user;
+  }
+
+  async findByEmailWithPassword(email: string): Promise<UserEntity> {    
+    const user = await this.userRepository.findOneBy({ email });
+    return user;
+  }
+
+  
+
   async findOne(id: number): Promise<UserEntity> {
-    const userData =
-      await this.userRepository.findOneBy({ id });
+    const userData =  await this.userRepository.findOneBy({ id });
     if (!userData) {
       throw new HttpException(
         'User Not Found',

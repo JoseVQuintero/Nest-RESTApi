@@ -1,22 +1,43 @@
 import {
   Entity,
   PrimaryGeneratedColumn,
-  Column
+  Column,
+  OneToMany,
+  JoinColumn,
 } from 'typeorm';
 import { IsJSON } from 'class-validator';
 import { IContent } from '../interface/profile';
+
+import { UserEntity as User } from '../../user/entities/user.entity';
+
+
+export enum UserRole {
+  ADMIN = 'admin',
+  EDITOR = 'editor',
+  GHOST = 'ghost',
+}
 
 @Entity()
 export class ProfileEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  fullName: string;
+  @Column({
+    type: 'enum',
+    enum: UserRole,
+    default: UserRole.GHOST,
+  })
+  role: UserRole;
 
-  @Column({ unique: true })
-  email: string;
+  @Column('jsonb', {
+    nullable: false,
+    default: {},
+  })
+  modules: IContent;
 
-  @Column('jsonb', { nullable: false, default: {} })
-  content: IContent;  
+  @OneToMany(
+    () => User,
+    (user) => user.profile,
+  )
+  user: User;
 }
