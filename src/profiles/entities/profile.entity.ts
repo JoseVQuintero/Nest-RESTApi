@@ -12,9 +12,9 @@ import { UserEntity as User } from '../../user/entities/user.entity';
 
 
 export enum UserRole {
-  ADMIN = 'admin',
   EDITOR = 'editor',
-  GHOST = 'ghost',
+  ADMIN = 'admin',
+  GHOST = 'ghost'
 }
 
 @Entity()
