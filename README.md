@@ -66,6 +66,152 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
+## Config data DB
+
+```bash
+# .env
+POSTGRES_USER=
+POSTGRES_HOST=
+POSTGRES_PASSWORD=
+POSTGRES_DATABASE=
+POSTGRES_PORT=
+PORT=
+MODE=PROD or DEV
+RUN_MIGRATIONS=true
+ACCESS_TOKEN_SECRET=
+```
+
+## Installation BD and Run Data Seed
+
+```bash
+# migrate db
+$ npm run start:dev
+
+# seed data
+$ npm run seed
+```
+
+API can be listened at https:///nest-rest-api.vercel.app or localhost 3000
+
+
+## API Reference
+
+#### Sign Up a new user
+
+```http
+  POST /auth/login
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `name` | `string` | **Required**. Name of the person signing up |
+| `email` | `string` | **Required**. Email of the person signing up |
+| `password` | `string` | **Required**. Password of the person signing up |
+
+Password is hashed and saved in the db. 
+
+**Example**
+```
+{
+    "name": "Manoj",
+    "email": "manojsethi@manojsethi.com",
+    "password": "MyRandomPassword"
+}
+```
+
+### Auth Endpoints
+#### Login
+
+```http
+  GET /auth/login
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `email` | `string` | **Required**. Email of the person signing in |
+| `password` | `string` | **Required**. Password of the person signing in |
+
+**Example**
+```
+{
+    "email": "manojsethi@manojsethi.com",
+    "password": "MyRandomPassword"
+}
+```
+
+#### SignIn
+
+```http
+  POST /auth/login
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `email` | `string` | **Required**. Email of the person signing in |
+| `password` | `string` | **Required**. Password of the person signing in |
+
+**Example**
+```
+{
+    "email": "manojsethi@manojsethi.com",
+    "password": "MyRandomPassword"
+}
+```
+
+After you are logged in you need to set the Authorization Header with the value of Bearer {{AccessToken}} in order to access the further API
+
+#### RefreshToken
+
+```http
+  GET /auth/refresh
+```
+**NOTE** You need to pass Authorization Header with Bearer {{RefreshToken}} (RefreshToken received in signin request) to get the new pair of tokens.
+
+```http
+  GET /auth/logout
+```
+**NOTE** You need to pass Authorization Header with Bearer {{AccessToken}} (AccessToken received in signin request) as Logout is a secured route and is authenticated by AccessToken.
+
+### Users Endpoints
+
+#### Get All Users
+
+```http
+  GET /users
+```
+
+#### Get User By ID
+
+```http
+  GET /users/:id
+```
+
+#### Update User By ID
+
+```http
+  PATCH /users/:id
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `name` | `string` | **Optional** Name of the person |
+| `email` | `string` | **Optional** Email of the person |
+| `password` | `string` | **Optional** Password of the person |
+
+**Example**
+```
+{
+    "email": "manojsethi@manojsethi.com",
+    "password": "MyRandomPassword"
+}
+```
+
+#### Delete User By ID
+
+```http
+  DELETE /users/:id
+```
+
 ## Support
 
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
