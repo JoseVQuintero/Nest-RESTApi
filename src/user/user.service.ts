@@ -38,12 +38,24 @@ export class UserService {
     return user;
   }
 
-  async findByEmailWithPassword(email: string): Promise<UserEntity> {    
-    const user = await this.userRepository.findOneBy({ email });
-    return user;
-  }
+  async findByEmailWithPassword(email: string): Promise<UserEntity> {   
 
-  
+    let entityWhere: UserEntity;
+    const user = await this.userRepository.findOne( { where: { ...entityWhere, email: email }, relations: { profile: true }  });
+    return user;
+    
+  } 
+
+  async findOneById(id: number): Promise<UserEntity> {
+    const userData =  await this.userRepository.findOneBy({ id });
+    if (!userData) {
+      throw new HttpException(
+        'User Not Found',
+        404,
+      );
+    }
+    return userData;
+  }
 
   async findOne(id: number): Promise<UserEntity> {
     const userData =  await this.userRepository.findOneBy({ id });

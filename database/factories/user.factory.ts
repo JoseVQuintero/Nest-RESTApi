@@ -7,14 +7,15 @@ import { ProfileEntity as Profile } from '../../src/profiles/entities/profile.en
 
 
 export default setSeederFactory(User, async (faker) => {
+  
   const user = new User();
-
+  const passText = faker.internet.password();
   user.firstName = faker.name.firstName();
   user.lastName = faker.name.lastName();
-  user.fullName = `${user.firstName} ${user.lastName}`;  
+  user.fullName = `${passText} ${user.firstName} ${user.lastName}`;  
   user.userName = faker.internet.userName(user.firstName, user.lastName);
   user.email = faker.internet.email(user.firstName, user.lastName);
-  user.password = await hash(faker.internet.password(), 10);
+  user.password = await hash(passText, 10);
   user.phone = faker.phone.number();
   user.avatar = faker.image.avatar();
   //user.profile = null;

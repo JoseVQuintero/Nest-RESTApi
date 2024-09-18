@@ -10,6 +10,11 @@ import {
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { Auth } from '../auth/decorators/auth.decorator';
+import { Role } from '../../src/common/enums/rol.enum';
+import { ActiveUser } from '../../src/common/decorators/active-user.decorator';
+import { UserActiveInterface } from 'src/common/interfaces/user-active.interface';
+
 
 @Controller('users') //route group
 export class UserController {
@@ -57,6 +62,7 @@ export class UserController {
   }
 
   @Get(':id')
+  @Auth([Role.EDITOR,Role.ADMIN])  
   async findOne(@Param('id') id: string) {
     try {
       const data = await this.userService.findOne(

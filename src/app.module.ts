@@ -10,6 +10,8 @@ import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import helmet from 'helmet';
 import { SimpleLoggerMiddleware } from './middleware';
 import { AuthModule } from './auth/auth.module';
+import { APP_GUARD } from '@nestjs/core';
+import { RolesGuard } from './auth/guard/roles.guard';
 
 var cors = require('cors');
 
@@ -26,18 +28,31 @@ var cors = require('cors');
       entities: [UserEntity, ProfileEntity],
       synchronize: true,
       logging: true,
-      ssl: process.env?.MODE === 'PROD' && { rejectUnauthorized: false }
+      ssl: process.env?.MODE === 'PROD' && {
+        rejectUnauthorized: false,
+      },
     }),
     UserModule,
     ProfilesModule,
-    AuthModule
+    AuthModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService/* ,
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
+    }, */
+  ],
 })
-
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(SimpleLoggerMiddleware, cors(), helmet()).forRoutes('*');
+    consumer
+      .apply(
+        SimpleLoggerMiddleware,
+        cors(),
+        helmet(),
+      )
+      .forRoutes('*');
   }
 }

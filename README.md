@@ -31,7 +31,7 @@ This app provide. It is done with:
   - Auth
   - Middleware
   - Migrate Seed
-  - Postresql
+  - PostgreSQL
   - API Rest
 
 ## Installation
