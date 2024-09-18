@@ -31,14 +31,13 @@ export class AuthController {
   login(
     @Body()
     loginDto: LoginDto,
+    @ActiveUser() user: UserActiveInterface
   ) {
     return this.authService.login(loginDto);
   }
 
   @Get('profile')
-  @Auth(Role.USER)
-  profile(@ActiveUser() user: UserActiveInterface) {
-    console.log(user)
+  profile(user: UserActiveInterface) {
     return this.authService.profile(user);
   }
 }
