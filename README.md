@@ -128,14 +128,14 @@ Password is hashed and saved in the db.
 
 | Parameter | Type     | Description                |
 | :-------- | :------- | :------------------------- |
-| `email` | `string` | **Required**. Email of the person signing in |
-| `password` | `string` | **Required**. Password of the person signing in |
+| `email` | `string` | **Required**. Email of the person signing in | Isadore.Fay6@gmail.com | Martina.Fritsch79@gmail.com | Wellington_OHara2@hotmail.com
+| `password` | `string` | **Required**. Password of the person signing in | XG1s9jyHGFmRmvp | Miha43OCdip693m | QcWI4EaWOYMh8Ld
 
 **Example**
 ```
 {
-    "email": "manojsethi@manojsethi.com",
-    "password": "MyRandomPassword"
+    "email": "Isadore.Fay6@gmail.com",
+    "password": "XG1s9jyHGFmRmvp"
 }
 ```
 
