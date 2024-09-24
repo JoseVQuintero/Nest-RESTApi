@@ -145,10 +145,10 @@ Password is hashed and saved in the db.
   POST /auth/login
 ```
 
-| Parameter | Type     | Description                |
-| :-------- | :------- | :------------------------- |
-| `email` | `string` | **Required**. Email of the person signing in |
-| `password` | `string` | **Required**. Password of the person signing in |
+| Parameter | Type     | Description                |        Demo 1              |           Demo 2            |             Demo 3             |
+| :-------- | :------- | :------------------------- | :------------------------- | :-------------------------- | :----------------------------- |
+| `email` | `string` | **Required**. Email of the person signing in | Isadore.Fay6@gmail.com | Martina.Fritsch79@gmail.com | Wellington_OHara2@hotmail.com
+| `password` | `string` | **Required**. Password of the person signing in | XG1s9jyHGFmRmvp | Miha43OCdip693m | QcWI4EaWOYMh8Ld
 
 **Example**
 ```
